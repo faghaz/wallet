@@ -25,8 +25,8 @@
                 // Display value in <h2>
                 const h2 = document.getElementById("data");
                 h2.textContent = `${rounded}`;
-// Store the value
-                localStorage.setItem("streamValue", rounded);
+ // Store full unrounded value for accuracy
+            localStorage.setItem("streamValue", i);
                 i += 0.05;
                 setTimeout(streamValue, 500); // delay 500ms
             }
