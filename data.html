@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Streaming Data</title>
+</head>
+<body>
+    <h2>Streaming Values</h2>
+    <ul id="log"></ul>
+
+    <script>
+        const log = document.getElementById("log");
+        let i = 0;
+
+        async function streamValue() {
+            if (i <= 1) {
+                const rounded = parseFloat(i.toFixed(2));
+
+                // Update UI
+                const li = document.createElement("li");
+                li.textContent = rounded;
+                log.appendChild(li);
+
+                // Send to backend
+                await fetch('http://localhost:5000/stream', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ value: rounded })
+                });
+
+                i += 0.05;
+                setTimeout(streamValue, 500); // call again after 500ms
+            }
+        }
+
+        streamValue();
+    </script>
+</body>
+</html>
