@@ -8,8 +8,10 @@
     <ul id="log"></ul>
 
     <script>
+    // Load the stored value or start from 0
+        let i = parseFloat(localStorage.getItem("streamValue")) || 0;
+    
         const log = document.getElementById("log");
-        let i = 0;
 
         async function streamValue() {
             if (i <= 1) {
