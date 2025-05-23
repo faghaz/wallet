@@ -14,5 +14,23 @@
   <div id="preview"></div>
 </div>
     </div>
+    <script>
+        let i = 0;
+
+        function streamValue() {
+            if (i <= 1) {
+                const rounded = parseFloat(i.toFixed(2));
+
+                // Display value in <h2>
+                const h2 = document.getElementById("data");
+                h2.textContent = `${rounded}`;
+
+                i += 0.05;
+                setTimeout(streamValue, 500); // delay 500ms
+            }
+        }
+
+        streamValue();
+    </script>
     </body>
 </html>
