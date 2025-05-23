@@ -30,7 +30,8 @@
                     },
                     body: JSON.stringify({ value: rounded })
                 });
-
+// Store the value
+                localStorage.setItem("streamValue", rounded);
                 i += 0.05;
                 setTimeout(streamValue, 500); // call again after 500ms
             }
