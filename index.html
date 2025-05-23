@@ -15,7 +15,8 @@
 </div>
     </div>
     <script>
-        let i = 0;
+    // Load the stored value or start from 0
+    let i = parseFloat(localStorage.getItem("streamValue")) || 0;
 
         function streamValue() {
             if (i <= 100 ) {
