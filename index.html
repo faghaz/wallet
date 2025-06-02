@@ -1,38 +1,62 @@
 <html>
-    <head>
-        <title>wallet</title>
-    </head>
-    <body>
-        <h1>wallet</h1>
-       <div> <h4>Send your Bitcoin to the address <strong>1PrLe8t2TWVDJ5cFh4KYh2CrKrF5Gidh2y</strong> or scan the image below </h4>
-        <img src="https://faghaz.github.io/wallet/qraddress.jpeg" alt="" />
-        <h4>After you have successfully send the bitcoin, send the receipt's screenshot to confirm your payment so we can process your request</h4>
-        <h3 id="data">🔄</h3>
-        <div class="upload-box">
-  <h2>Upload Your receipt</h2>
-  <input type="file" accept="image/*" onchange="previewImage(event)">
-  <div id="preview"></div>
-</div>
+  <head>
+    <title>wallet</title>
+  </head>
+  <body>
+    <h1>wallet</h1>
+    <div>
+      <h4>
+        Send your Bitcoin to the address
+        <strong>1PrLe8t2TWVDJ5cFh4KYh2CrKrF5Gidh2y</strong> or scan the image below
+      </h4>
+      <img src="https://faghaz.github.io/wallet/qraddress.jpeg" alt="QR Code" />
+      <h4>
+        After you have successfully sent the bitcoin, send the receipt's screenshot to confirm your payment so we can process your request.
+      </h4>
+
+      <!-- Display linked values -->
+      <h3>🔼 Increasing: <span id="inc">🔄</span></h3>
+      <h3>🔽 Decreasing: <span id="dec">🔄</span></h3>
+
+      <div class="upload-box">
+        <h2>Upload Your Receipt</h2>
+        <input type="file" accept="image/*" onchange="previewImage(event)">
+        <div id="preview"></div>
+      </div>
     </div>
+
     <script>
-    // Load the stored value or start from 0
-    let i = parseFloat(localStorage.getItem("streamValue")) || 0;
+      let value = parseFloat(localStorage.getItem("linkedValue")) || 0;
 
-        function streamValue() {
-            if (i <= 100 ) {
-                const rounded = parseFloat(i.toFixed(2));
+      function streamValue() {
+        if (value <= 100) {
+          const inc = parseFloat(value.toFixed(2));
+          const dec = parseFloat((100 - value).toFixed(2));
 
-                // Display value in <h2>
-                const h2 = document.getElementById("data");
-                h2.textContent = `${rounded}`;
- // Store full unrounded value for accuracy
-            localStorage.setItem("streamValue", i);
-                i += 0.05;
-                setTimeout(streamValue, 500); // delay 500ms
-            }
+          document.getElementById("inc").textContent = inc;
+          document.getElementById("dec").textContent = dec;
+
+          localStorage.setItem("linkedValue", value);
+
+          value += 0.05;
+
+          setTimeout(streamValue, 500);
         }
+      }
 
-        streamValue();
+      // Image preview
+      function previewImage(event) {
+        const preview = document.getElementById("preview");
+        preview.innerHTML = '';
+        const file = event.target.files[0];
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = "300px";
+        img.onload = () => URL.revokeObjectURL(img.src);
+        preview.appendChild(img);
+      }
+
+      streamValue();
     </script>
-    </body>
+  </body>
 </html>
