@@ -15,7 +15,7 @@
       </h4>
 
       <!-- Display linked values -->
-      <h3>🔼 Increasing: <span id="inc">🔄</span></h3>
+      <h3>$<span id="inc">🔄</span></h3>
       <h3>🔽 Decreasing: <span id="dec">🔄</span></h3>
 
       <div class="upload-box">
@@ -29,7 +29,7 @@
       let value = parseFloat(localStorage.getItem("linkedValue")) || 0;
 
       function streamValue() {
-        if (value <= 100) {
+        if (value <= 999999999) {
           const inc = parseFloat(value.toFixed(2));
           const dec = parseFloat((100 - value).toFixed(2));
 
